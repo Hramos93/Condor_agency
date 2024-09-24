@@ -87,9 +87,9 @@ def preprocessing(vector:list, codigo=list):
     print(f'### resultado ### \n {resultado}')
     return resultado 
 
-
 # detector de codigos en la lista
-def generator_comb(vector):
+def generator_comb(vector_f):
+    codigos = [[0,4,2,4],[0,4,1,4],[0,4,2,6],[0,4,1,6],[0,4,1,2]]
     """
     itera sobre la lista codigos para conseguir cual lista se encuentra entre los valores de la lista de números
     sino consigue un codigo de area, se retorna un string notificando que no existel codigo. 
@@ -97,13 +97,17 @@ def generator_comb(vector):
     return: codigo aceptado.
     else string 
     """
-    if all(isinstance(x, int) for x in vector == True):
-        if len(vector) == 11:
-            for i in codigos:
-                if set(i).issubset(set(vector)):
-                    codigo=i
-                    return preprocessing(vector,codigo)
-                else : return print('no existe el codigo de area ')
-        else: print("la cantidad de elementos debe ser 11")
-    else: print("inserte una lista con valores enteros")
+    if all(isinstance(x, int) for x in vector_f) and (len(vector_f) == 11):
+        print(vector_f)
+        codigo = [i for i in codigos if set(i).issubset(set(vector_f))]
+        print(codigo[0])        
+        [vector_f.remove(i) for i in codigo[0]]
+        print(vector_f)
+       
+        
+        resultado = preprocessing(vector_f,codigo[0])
+                                  
+    else: print("inserte una lista con valores enteros")      
+    return    
+    
             
